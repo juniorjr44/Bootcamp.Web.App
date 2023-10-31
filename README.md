@@ -2,7 +2,6 @@
 This template is a SPA application built using ASP.NET Core 7.0 as the REST API server and React/Redux/TypeScript as the web client (Bulma + SASS + styled-components for UI styling). You can find a similar version using Vue + Vuex (and associated libraries) here: [aspnet-core-vue-vuex-playground-template](https://github.com/based-ghost/aspnet-core-vue-vuex-playground-template)
 
 
-![demo](./demo/react_dot_net_52530-2021.gif)
 
 
 ## General Overview
@@ -16,20 +15,7 @@ This template is vaguley based on the original React + Redux .NET Core SPA templ
   - SignalR
   - HealthChecks + [AspNetCore.HealthChecks.UI package](https://github.com/xabaril/AspNetCore.Diagnostics.HealthChecks) - this provides  a nicely formatted UI for viewing the results of the HealthCheck modules in use and is accessed on ```/health-ui``` (also, provide an option for viewing the raw JSON data that the UI package prettifies for you at ```/healthchecks-json```). Access this view in the application via the floating settings cog on right screen by clicking the "Health Checks" link.
   - API Documentation using Swagger UI - using package [NSwag.AspNetCore](http://NSwag.org) to prettify the specification output and display at ```/swagger/*``` & [NSwag.MSBuild](http://NSwag.org) to handle automatic updates - so that when the project builds, the NSwag CLI will run and generate an updated API specification. Access this view in the application via the floating settings cog on right screen by clicking the "Swagger API" link.
-  - Brotli/Gzip response compression (production build)
-- **Client**
-  - [`React`](https://reactjs.org/)
-  - [`Redux`](https://redux.js.org/)
-  - [`TypeScript`](https://www.typescriptlang.org/)
-  - [`Webpack`](https://github.com/webpack/webpack) for bundling of application assets and HMR (Hot Module Replacement)
-  - [`Bulma CSS`](https://bulma.io/) + [`SASS`](https://github.com/sass/sass) + Font Awesome 5 (using fontawesome-svg-core)
-  - [`styled-components`](https://www.styled-components.com/) - CSS-in-JS via template literals - Examples in this project:   `Checkbox.tsx`, `Spinner.tsx`, `Authenticator.tsx`, `Settings.tsx`, and `Footer.tsx` are written using `styled-components`.
-  - [`react-functional-select`](https://github.com/based-ghost/react-functional-select) - A micro-sized & micro-optimized select component for ReactJS. Inspired by [`react-select`](https://github.com/JedWatson/react-select) and built for ultimate performance - leverages [`react-window`](https://github.com/bvaughn/react-window) to virtualize long options data and `styled-components` to handle styling via CSS-in-JS. Note: I am the author of this package.
-  - [`Axios`](https://github.com/axios/axios) for REST endpoint requests
-  - [`react-toastify`](https://github.com/fkhadra/react-toastify) - a highly configurable toast notification library - comes hooked up to display login error & SignalR hub push notifications examples.
-  - react-router/react-router-dom - route transitions handled using [`react-transition-group`](https://github.com/reactjs/react-transition-group)
-  - Custom, reusable Dropdown & Checkbox components that provide full functionality w/ state management (without a JQuery dependency).
-  - Two different loader components (spinner & authentication animation w/ callback for success/fail)
+
 
 ## Setup
   - [Node.js version >= 14](https://nodejs.org/en/download/)
