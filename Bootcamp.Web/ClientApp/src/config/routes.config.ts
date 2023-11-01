@@ -30,16 +30,6 @@ export const Routes: Route[] = [
     transition: TRANSITION_DEFAULT
   },
   {
-    path: '/form',
-    showInNav: true,
-    name: 'Form',
-    Component: Form,
-    transition: {
-      classNames: 'page-slide-left',
-      timeout: { enter: 350, exit: 250 }
-    }
-  },
-  {
     showInNav: true,
     path: '/home',
     name: 'Home',
