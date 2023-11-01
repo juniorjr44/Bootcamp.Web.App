@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Bootcamp.Api.Helpers;
 using Bootcamp.Api.Model;
+using Bootcamp.Api.ViewModel;
 using Newtonsoft.Json;
 using System.Linq;
 
@@ -8,6 +9,11 @@ namespace Bootcamp.Api.Bls
 {
     public class ContactBL : BaseBl, IContactBL
     {
+        private readonly IMapper _mapper;
+        public ContactBL(IMapper mapper) 
+        { 
+            _mapper = mapper;
+        }
         public async Task<List<Contact>> GetAll()
         {
             var returnObj = await ReadData();
@@ -18,24 +24,27 @@ namespace Bootcamp.Api.Bls
             var returnList = JsonConvert.DeserializeObject<List<Contact>>(await ReadData()); 
             return returnList.SingleOrDefault(x => x.Id == id);
         }
-        public async Task<Contact> Create(Contact contact)
+        public async Task<Contact> Create(ContactRequest contact)
         {
+            var contactObj = _mapper.Map<Contact>(contact);
             var returnList = JsonConvert.DeserializeObject<List<Contact>>(await ReadData());
-            contact.Id = returnList.Select(x => x.Id).ToList().generateId();
-            returnList.Add(contact);
+            contactObj.Id = returnList.Select(x => x.Id).ToList().generateId();
+            returnList.Add(contactObj);
             await WriteData(JsonConvert.SerializeObject(returnList));
 
-            return contact;
+            return contactObj;
         }
-        public async Task<Contact> Update(Contact contact)
+        public async Task<Contact> Update(ContactRequest contact)
         {
-            IMapper.Map<BudgetDetail_Response>(obj);
-            var returnList = JsonConvert.DeserializeObject<List<Contact>>(await ReadData());
-            var obj = returnList.SingleOrDefault(x => x.Id == contact.Id);
-            returnList.Remove(obj);
-            await WriteData(JsonConvert.SerializeObject(returnList));
+            var contactObj = _mapper.Map<Contact>(contact);
 
-            return obj;
+            //remove the obj from the file
+            await Remove(contactObj.Id);
+
+            //then recreate the object
+            await Create(contact);
+
+            return contactObj;
         }
         public async Task<Contact> Remove(int id)
         {

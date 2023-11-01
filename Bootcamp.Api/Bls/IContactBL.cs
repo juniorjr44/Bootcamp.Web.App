@@ -1,4 +1,5 @@
 ﻿using Bootcamp.Api.Model;
+using Bootcamp.Api.ViewModel;
 
 namespace Bootcamp.Api.Bls
 {
@@ -6,6 +7,8 @@ namespace Bootcamp.Api.Bls
     {
         Task<List<Contact>> GetAll();
         Task<Contact> Get(int id);
-        Task<Contact> Create(Contact contact);
+        Task<Contact> Create(ContactRequest contact);
+        Task<Contact> Update(ContactRequest contact);
+        Task<Contact> Remove(int id);
     }
 }
