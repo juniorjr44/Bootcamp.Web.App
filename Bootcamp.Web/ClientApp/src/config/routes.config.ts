@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 import type { Params } from 'react-router-dom';
-import { Login, Dashboard, FetchData, Form } from '../containers';
+import { Login, Dashboard, FetchData } from '../containers';
 import type { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export const TRANSITION_DEFAULT = {
