@@ -3,7 +3,6 @@ using Bootcamp.Api.Helpers;
 using Bootcamp.Api.Model;
 using Bootcamp.Api.ViewModel;
 using Newtonsoft.Json;
-using System.Linq;
 
 namespace Bootcamp.Api.Bls
 {
@@ -14,11 +13,16 @@ namespace Bootcamp.Api.Bls
         { 
             _mapper = mapper;
         }
-        public async Task<List<Contact>> GetAll()
+        public async Task<List<Contact>> GetAll() => JsonConvert.DeserializeObject<List<Contact>>(await ReadData());
+        public async Task<List<Contact>> List(int pageIndex)
         {
-            var returnObj = await ReadData();
-            return JsonConvert.DeserializeObject<List<Contact>>(returnObj);
+            var pageSize = 5;
+            var skip = (pageIndex - 1) * pageSize;
+            var returnList = JsonConvert.DeserializeObject<List<Contact>>(await ReadData());
+            var result = returnList.Skip(skip).Take(pageSize).ToList();
+            return result;
         }
+
         public async Task<Contact> Get(int id)
         {
             var returnList = JsonConvert.DeserializeObject<List<Contact>>(await ReadData()); 

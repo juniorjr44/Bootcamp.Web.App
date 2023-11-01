@@ -14,8 +14,11 @@ namespace Bootcamp.Api.Controllers
             _contactBL = contactBL;
         }
 
-        [HttpGet(RouteHelper.Contact.Main)]
-        public async Task<IActionResult> Get() => Ok(await _contactBL.GetAll());
+        [HttpGet(RouteHelper.Contact.All)]
+        public async Task<IActionResult> GetAll() => Ok(await _contactBL.GetAll());
+
+        [HttpGet(RouteHelper.Contact.List)]
+        public async Task<IActionResult> List(int pageIndex) => Ok(await _contactBL.List(pageIndex));
 
         [HttpGet(RouteHelper.Contact.Get)]
         public async Task<IActionResult> Get(int id) => Ok(await _contactBL.Get(id));

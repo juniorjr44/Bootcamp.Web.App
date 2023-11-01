@@ -48,15 +48,15 @@ export const Routes: Route[] = [
   },
   {
     showInNav: true,
-    name: 'Fetch',
-    path: '/fetch/:startDateIndex',
+    name: 'Contacts',
+    path: '/contact/:pageIndex',
     Component: FetchData,
     transition: {
       classNames: 'page-slide-right',
       timeout: { enter: 350, exit: 250 }
     },
     params: {
-      startDateIndex: '0'
+        pageIndex: '0'
     }
   }
 ];

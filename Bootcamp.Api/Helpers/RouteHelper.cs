@@ -6,10 +6,11 @@
         {
             private const string Base = "/contact";
             public const string Get = Base + "/{id}";
-            public const string Main = Base;
+            public const string List = Base + "/list/{pageIndex}";
             public const string Delete = Base + "/remove";
             public const string Update = Base + "/update";
             public const string Create = Base + "/create";
+            public const string All = Base;
         }
     }
 }

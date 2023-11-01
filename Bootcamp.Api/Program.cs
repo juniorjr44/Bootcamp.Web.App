@@ -1,8 +1,17 @@
 using AutoMapper;
 using Bootcamp.Api.Bls;
 using Bootcamp.Api.Data;
+using Microsoft.Extensions.Configuration;
 
+var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = builder.Configuration
+ .SetBasePath(Directory.GetCurrentDirectory())
+ .AddJsonFile($"appsettings.json", optional: false)
+ .AddJsonFile($"appsettings.{env}.json", optional: true)
+ .AddEnvironmentVariables()
+ .Build();
 
 // Add services to the container
 builder.Services.AddControllers();
@@ -18,7 +27,23 @@ var mapperConfig = new MapperConfiguration(mc =>
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(configuration["CorsSettings:Policy"],
+    builder =>
+    {
+        builder.WithOrigins(configuration["CorsSettings:WhiteListLinks"])
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin();
+    });
+});
+
+
 var app = builder.Build();
+app.UseCors(configuration["CorsSettings:Policy"]);
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

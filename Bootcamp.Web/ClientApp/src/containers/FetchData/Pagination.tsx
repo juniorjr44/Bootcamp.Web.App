@@ -1,21 +1,21 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
-import type { WeatherState } from '../../store/weatherSlice';
+import type { ContactState } from '../../store/contactSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-type PaginationProps = Pick<WeatherState, 'startDateIndex'>;
+type PaginationProps = Pick<ContactState, 'pageIndex'>;
 
-const Pagination = memo<PaginationProps>(({ startDateIndex = 0 }) => (
+const Pagination = memo<PaginationProps>(({ pageIndex = 0 }) => (
   <p className="buttons pagination-group">
     <Link
       className="button is-info"
-      to={`/fetch/${startDateIndex - 5}`}
+            to={`/contact/${pageIndex - 1}`}
     >
       <FontAwesomeIcon icon="angle-double-left" />
     </Link>
     <Link
       className="button is-info"
-      to={`/fetch/${startDateIndex + 5}`}
+            to={`/contact/${pageIndex + 1}`}
     >
       <FontAwesomeIcon icon="angle-double-right" />
     </Link>
