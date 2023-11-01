@@ -1,4 +1,6 @@
+using AutoMapper;
 using Bootcamp.Api.Bls;
+using Bootcamp.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IContactBL, ContactBL>();
+
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile<MapperProfile>();
+});
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
